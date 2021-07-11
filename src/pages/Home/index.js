@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ScrollView } from 'react-native';
 import axios from 'axios';
 
 export default class Home extends Component {
@@ -24,12 +24,12 @@ export default class Home extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 <Text>Home screen</Text>
                 <View>
                     {this.state.data.map((item, index) => {
                         return (
-                            <View key={index} style={{borderBottomWidth: 3, padding: 5}}>
+                            <View key={index} style={{ borderBottomWidth: 3, padding: 5 }}>
                                 <Text style={{
                                     fontSize: 30
                                 }}>
@@ -38,15 +38,20 @@ export default class Home extends Component {
                                 <Text>
                                     {item.snippet}
                                 </Text>
+                                <Button
+                                    title="Detail"
+                                    onPress={() => this.props.navigation.navigate('Detail', {
+                                        id: item._id,
+                                        title: item.title,
+                                        snippet: item.snippet,
+                                        body: item.body
+                                    })}
+                                />
                             </View>
                         )
                     })}
                 </View>
-                <Button
-                    title="Detail"
-                    onPress={() => this.props.navigation.navigate('Detail')}
-                />
-            </View>
+            </ScrollView>
         )
     }
 }
