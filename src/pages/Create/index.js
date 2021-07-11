@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput, View, StyleSheet, Button } from "react-native";
+import axios from "axios";
 
 const Create = () => {
     const [title, setTitle] = React.useState("");
@@ -7,7 +8,15 @@ const Create = () => {
     const [body, setBody] = React.useState("");
 
     const Post = () => {
-        alert("ASUUUUU")
+        const data = {
+            title,
+            snippet,
+            body
+        }
+        console.log("Before ", data)
+        axios.post('https://mini-blogs-app.herokuapp.com/api/create', data)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 
     return (
